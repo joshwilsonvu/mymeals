@@ -1,0 +1,22 @@
+{
+  "name": "mymeals-client",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "client": "file:packages/client",
+    "server": "file:packages/server"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "meal",
+    "planning",
+    "weekly",
+    "template",
+    "react",
+    "pwa"
+  ],
+  "author": "Josh Wilson <joshua.wilson@vanderbilt.edu>",
+  "license": "ISC"
+}
