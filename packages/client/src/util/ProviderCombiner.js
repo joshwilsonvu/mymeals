@@ -10,6 +10,6 @@ import React from "react";
  */
 export default ({ providers, children }) => (
   providers.reduceRight((acc, p) => {
-    return React.cloneElement(p, {}, acc);
+    return React.cloneElement(p, { children: acc });
   }, ...children)
 )
