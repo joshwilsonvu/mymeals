@@ -3,17 +3,20 @@
   "author": "Josh Wilson <joshua.wilson@vanderbilt.edu>",
   "license": "ISC",
   "version": "0.0.1",
-  "main": "index.js",
+  "browser": "src/index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "build:dev": "webpack --display-error-details --config webpack.dev.js",
+    "build": "npm run build:prod && npm run build:prerender",
+    "build:dev": "webpack --show-error-details --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:prerender": "webpack --config webpack.prerender.js",
     "start": "npm run build & http-server ./dist",
     "start:dev": "webpack-dev-server --open --config webpack.dev.js",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src",
-    "prettier": "prettier"
+    "lint:fix": "eslint --fix ./src"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/polyfill": "^7.6.0",
     "@chakra-ui/core": "^0.2.8",
     "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.17",
@@ -43,18 +46,22 @@
     "esm": "^3.2.25",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
+    "prerender-loader": "^1.3.0",
     "prettier": "^1.18.2",
     "webpack": "^4.40.2",
+    "webpack-bundle-analyzer": "^3.5.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "browserslist": [
     "defaults"
   ],
   "babel": {
     "plugins": [
-      "babel-plugin-emotion"
+      "babel-plugin-emotion",
+      "@babel/transform-runtime"
     ],
     "presets": [
       "@babel/env",
@@ -75,7 +82,8 @@
     ],
     "globals": {
       "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
+      "SharedArrayBuffer": "readonly",
+      "PRERENDER": "readonly"
     },
     "parser": "babel-eslint",
     "plugins": [

@@ -1,11 +1,14 @@
 "use strict";
 
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve("src", "index.js"),
+  context: path.resolve("src"),
+  entry: {
+    bundle: "./index.js"
+  },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist")
@@ -23,6 +26,7 @@ module.exports = {
       }
     ]
   },
+  devtool: "inline-source-map",
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -35,8 +39,11 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ title: "My Meals" })
+    new webpack.ProgressPlugin(),
+    new webpack.DefinePlugin({
+      PRERENDER: false
+    }),
+    new CleanWebpackPlugin()
   ],
   stats: "minimal"
 };
