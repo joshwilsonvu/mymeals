@@ -1,25 +1,25 @@
-'use strict';
+"use strict";
 
-import path from 'path';
-import webpack from 'webpack';
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  context: path.join(__dirname, '/src/client'),
-  entry: './index.js',
+  entry: path.resolve("src", "index.js"),
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'public/js')
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ["babel-loader"]
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
@@ -28,12 +28,15 @@ module.exports = {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all'
+          name: "vendor",
+          chunks: "all"
         }
       }
     }
   },
-  plugins: [],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({ title: "My Meals" })
+  ],
   stats: "minimal"
 };

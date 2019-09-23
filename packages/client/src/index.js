@@ -1,26 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "./redux";
+import { applicationStore } from "./redux";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "styled-components";
 
+//import theme from "./theme";
+import App from "./pages/index";
 
-import theme from "./theme";
-import ProviderCombiner from "./util/ProviderCombiner";
-
-
-// TODO preload state
-// if (window.__PRELOADED_STATE__) {
-// }
+const store = applicationStore();
 
 // Function to render the whole application
 ReactDOM.render(
-  <ProviderCombiner providers={[
-    <Provider store={store}/>,
-    <ThemeProvider theme={theme}/>
-  ]}>
-    <App/>
-  </ProviderCombiner>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
-

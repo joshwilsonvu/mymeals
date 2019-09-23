@@ -8,8 +8,7 @@ import React from "react";
  * @param children
  * @return {*} a new combined provider component
  */
-export default ({ providers, children }) => (
+export default ({ providers, children }) =>
   providers.reduceRight((acc, p) => {
     return React.cloneElement(p, { children: acc });
-  }, ...children)
-)
+  }, ...children);

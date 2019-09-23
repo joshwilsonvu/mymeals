@@ -1,7 +1,18 @@
 {
   "name": "mymeals-client",
+  "author": "Josh Wilson <joshua.wilson@vanderbilt.edu>",
+  "license": "ISC",
   "version": "0.0.1",
   "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --display-error-details --config webpack.dev.js",
+    "start": "npm run build & http-server ./dist",
+    "start:dev": "webpack-dev-server --open --config webpack.dev.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "prettier": "prettier"
+  },
   "dependencies": {
     "@chakra-ui/core": "^0.2.8",
     "@emotion/core": "^10.0.17",
@@ -13,21 +24,75 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
-    "redux-saga": "^1.1.1",
-    "styled-components": "^4.3.2"
+    "redux-saga": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-emotion": "^10.0.19",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "esm": "^3.2.25",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
     "prettier": "^1.18.2",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1",
+    "webpack-merge": "^4.2.2"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "browserslist": [
+    "defaults"
+  ],
+  "babel": {
+    "plugins": [
+      "babel-plugin-emotion"
+    ],
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ]
   },
-  "author": "Josh Wilson <joshua.wilson@vanderbilt.edu>",
-  "license": "ISC"
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended",
+      "plugin:compat/recommended",
+      "plugin:react/recommended"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+      "react",
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/prop-types": [
+        0
+      ]
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  }
 }
