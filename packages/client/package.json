@@ -5,10 +5,8 @@
   "version": "0.0.1",
   "browser": "src/index.js",
   "scripts": {
-    "build": "npm run build:prod && npm run build:prerender",
-    "build:dev": "webpack --show-error-details --config webpack.dev.js",
-    "build:prod": "webpack --config webpack.prod.js",
-    "build:prerender": "webpack --config webpack.prerender.js",
+    "build": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
     "start": "npm run build & http-server ./dist",
     "start:dev": "webpack-dev-server --open --config webpack.dev.js",
     "lint": "eslint ./src",

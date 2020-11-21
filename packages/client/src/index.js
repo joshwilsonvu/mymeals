@@ -3,4 +3,5 @@ import { render, hydrate } from "react-dom";
 import App from "./components/App";
 
 // Render the whole application onto pre-rendered HTML
-(PRERENDER ? hydrate : render)(<App />, document.getElementById("root"));
+const ren = process.env.NODE_ENV === "production" ? hydrate : render;
+ren(<App />, document.getElementById("root"));

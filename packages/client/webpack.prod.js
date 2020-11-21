@@ -4,6 +4,7 @@ const path = require("path");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const common = require("./webpack.common");
 
 module.exports = merge(common, {
@@ -14,8 +15,8 @@ module.exports = merge(common, {
       reportFilename: path.join("..", "reports", "report.html"),
       openAnalyzer: false
     }),
-    new webpack.DefinePlugin({
-      PRERENDER: true
+    new HtmlWebpackPlugin({
+      template: "template.js"
     })
   ]
 });

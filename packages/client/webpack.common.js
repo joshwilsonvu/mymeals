@@ -5,6 +5,7 @@ const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
+  mode: "development",
   context: path.resolve("src"),
   entry: {
     bundle: "./index.js"
@@ -27,7 +28,7 @@ module.exports = {
     ]
   },
   devtool: "inline-source-map",
-  optimization: {
+  /*optimization: {
     splitChunks: {
       cacheGroups: {
         commons: {
@@ -37,12 +38,9 @@ module.exports = {
         }
       }
     }
-  },
+  },*/
   plugins: [
     new webpack.ProgressPlugin(),
-    new webpack.DefinePlugin({
-      PRERENDER: false
-    }),
     new CleanWebpackPlugin()
   ],
   stats: "minimal"
